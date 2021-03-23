@@ -42,6 +42,6 @@ if __name__ == '__main__':
 				if word.isnumeric() or not word.isalpha(): continue
 				if len(word) < 3: continue
 				
-				print(word)
+				print(word.lower())
 
 	sys.exit(0)
