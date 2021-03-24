@@ -43,6 +43,7 @@ if __name__ == '__main__':
 				word.translate(str.maketrans('', '', string.punctuation))
 
 				# Make Sure Valid
+				word = word.rstrip()
 				if word.isnumeric() or not word.isalpha(): continue
 				if len(word) < 3: continue
 				
