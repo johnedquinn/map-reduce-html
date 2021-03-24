@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 
+### Imports
+
 import sys
+import io
+
+### Main Execution
 
 if __name__ == '__main__':
 
 	table = {}
 
-	for line in sys.stdin:
+	# Add UTF-8 Support
+	stream = io.TextIOWrapper(sys.stdin.buffer, encoding='iso-8859-1')
+
+	for line in stream:
 
 		# Grab Key Value
 		word, count = line.rstrip().split()
