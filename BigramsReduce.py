@@ -18,8 +18,11 @@ if __name__ == '__main__':
 	for line in stream:
 
 		# Grab Key Value
-		word1, word2, count = line.rstrip().split()
-		table[word1][word2] += int(count)
+		try:
+			word1, word2, count = line.rstrip().split()
+			table[word1][word2] += int(count)
+		except:
+			continue
 
 	l = { f'{item[0]}:{d[0]}': d[1] for item in table.items() for d in item[1].items() }
 
