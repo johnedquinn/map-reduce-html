@@ -41,7 +41,8 @@ def Bigrams():
 
 	print('Running WordCount Map-Reduce')
 	command = f'''
-		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+		hadoop \
+		jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 		-files    BigramsMap.py,BigramsReduce.py \
 		-input    {WORDS_DIR} \
 		-output   {OUT_DIR} \
