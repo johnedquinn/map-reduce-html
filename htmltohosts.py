@@ -16,8 +16,11 @@ import urllib.parse
 
 if __name__ == '__main__':
 
+	# Add UTF-8 Support
+	stream = io.TextIOWrapper(sys.stdin.buffer, encoding='iso-8859-1')
+
 	# Grab Standard Input
-	for line in sys.stdin:
+	for line in stream:
 
 		# Grab URLs
 		urls = re.findall('href="([^"]+)"', line)

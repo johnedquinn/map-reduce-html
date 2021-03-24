@@ -11,14 +11,18 @@ import sys
 import re
 import urllib.parse
 import string
+import io
 
 
 ### Main Execution
 
 if __name__ == '__main__':
 
+	# Add UTF-8 Support
+	stream = io.TextIOWrapper(sys.stdin.buffer, encoding='iso-8859-1')
+
 	# Grab Standard Input
-	for line in sys.stdin:
+	for line in stream:
 
 		line = line.rstrip()
 
