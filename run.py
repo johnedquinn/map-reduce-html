@@ -2,11 +2,11 @@
 
 import os
 
-def CleanData():
+def HtmlToWords():
 
-	CLEAN_DIR   = '/users/jquinn13/cleaned'
+	WORDS_DIR = '/users/jquinn13/Words'
 
-	print('Cleaning Data')
+	print('Running HTML To Words')
 	command = f'''
 		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 		-files    htmltowords.py \
@@ -17,29 +17,23 @@ def CleanData():
 	'''
 	os.system(command)
 
+
 def WordCount():
 
-	HADOOP_HOME = '/users/jquinn13'
-	HTML_DIR = 'WsAdksFskeo18dnc'
-	WORD_COUNT_DIR = 'cni29324ifnec23oeinc'
-
-
+	WORDS_DIR   = '/users/jquinn13/Words'
+	WC_DIR = '/users/jquinn13/WordCount'
 
 	print('Running WordCount Map-Reduce')
 	command = f'''
 		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 		-files    WordCountMap.py,WordCountReduce.py \
-		-input    {HADOOP_HOME}/{HTML_DIR} \
-		-output   {HADOOP_HOME}/{WORD_COUNT_DIR} \
+		-input    {WORDS_DIR} \
+		-output   {WC_DIR} \
 		-mapper   WordCountMap.py \
 		-reducer  WordCountReduce.py
 	'''
 	os.system(command)
-
-	#print('Removing Directories')
-	#os.system(f'hadoop fs -rm -r {HADOOP_HOME}/{HTML_DIR}')
-	#os.system(f'hadoop fs -rm -r {HADOOP_HOME}/{WORD_COUNT_DIR}')
 	
 if __name__ == '__main__':
 
-	CleanData()
+	WordCount()

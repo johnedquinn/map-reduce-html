@@ -17,5 +17,5 @@ if __name__ == '__main__':
 		else:
 			table[word] += int(count)
 
-	for key, val in table.items():
+	for key, val in sorted(table.items(), key=lambda item: item[1], reverse=True):
 		print(f'{key}\t{val}')
