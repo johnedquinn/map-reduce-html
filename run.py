@@ -11,8 +11,23 @@ def HtmlToWords():
 		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 		-files    htmltowords.py \
 		-input    /public/www.2021 \
-		-output   {CLEAN_DIR} \
+		-output   {WORDS_DIR} \
 		-mapper   htmltowords.py \
+		-reducer  NONE
+	'''
+	os.system(command)
+
+def HtmlToHostWords():
+
+	HOST_WORDS_DIR = '/users/jquinn13/HostWords'
+
+	print('Running HTML To Words')
+	command = f'''
+		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+		-files    htmltowords.py \
+		-input    /public/www.2021 \
+		-output   {HOST_WORDS_DIR} \
+		-mapper   'htmltowords.py -h' \
 		-reducer  NONE
 	'''
 	os.system(command)
@@ -53,4 +68,4 @@ def Bigrams():
 	
 if __name__ == '__main__':
 
-	Bigrams()
+	HtmlToHostWords()
