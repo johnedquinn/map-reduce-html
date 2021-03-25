@@ -17,12 +17,19 @@ if __name__ == '__main__':
 	for line in stream:
 
 		# Parse Stream
-		line = line.rstrip()
-		host, word = line.split()
+		try:
+			split = line.rstrip().split()
+			host = split[0]
+			word = split[1]
+		except Exception as ex:
+			continue
 		
 		# Grab Hostname
-		path = urllib.parse.urlparse(host).path
-		host = os.path.split(path)[1]
+		try:
+			path = urllib.parse.urlparse(host).path
+			host = os.path.split(path)[1]
+		except Exception as ex:
+			continue
 
 		# Standard Output
 		print(f'{word}\t{host}')
