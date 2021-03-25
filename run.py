@@ -54,7 +54,7 @@ def Bigrams():
 	WORDS_DIR   = '/users/jquinn13/Words'
 	OUT_DIR = '/users/jquinn13/Bigrams'
 
-	print('Running WordCount Map-Reduce')
+	print('Running Bigrams Map-Reduce')
 	command = f'''
 		hadoop \
 		jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
@@ -65,7 +65,24 @@ def Bigrams():
 		-reducer  BigramsReduce.py
 	'''
 	os.system(command)
+
+def InvertedIndex():
+
+	HOST_WORDS_DIR   = '/users/jquinn13/HostWords'
+	OUT_DIR = '/users/jquinn13/InvertedIndex'
+
+	print('Running InvertedIndex Map-Reduce')
+	command = f'''
+		hadoop \
+		jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+		-files    InvertedIndexMap.py,InvertedIndexReduce.py \
+		-input    {HOST_WORDS_DIR} \
+		-output   {OUT_DIR} \
+		-mapper   InvertedIndexMap.py \
+		-reducer  InvertedIndexReduce.py
+	'''
+	os.system(command)
 	
 if __name__ == '__main__':
 
-	HtmlToHostWords()
+	InvertedIndex()
