@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import sys
 
 def HtmlToWords():
 
@@ -97,7 +98,29 @@ def InvertedIndex():
 		-reducer  InvertedIndexReduce.py
 	'''
 	os.system(command)
+
+def Hadoop(files, inDir, outDir, mapper, reducer):
+	command = f'''
+		hadoop \
+		jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+		-files    {files} \
+		-input    {inDir} \
+		-output   {outDir} \
+		-mapper   {mapper} \
+		-reducer  {reducer}
+	'''
+	os.system(command)
+	
 	
 if __name__ == '__main__':
 
-	InvertedIndex()
+	if len(sys.argv) != 2:
+		print('USAGE: ./run.py [OPTION]')
+		sys.exit(1)
+
+	if sys.argv[1] == 'OutLinks':
+		Hadoop('OutLinksMap.py,OutLinksReduce.py', '/users/jquinn13/Hosts', '/users/jquinn13/OutLinks', 'OutLinksMap.py', 'OutLinksReduce.py')
+	elif sys.argv[1] == 'Hosts':
+		Hadoop('htmltohosts.py', '/public/www.2021', '/users/jquinn13/Hosts', 'htmltohosts.py', 'NONE')
+	else:
+		print('Not an option')
