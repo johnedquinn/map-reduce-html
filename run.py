@@ -21,13 +21,28 @@ def HtmlToHostWords():
 
 	HOST_WORDS_DIR = '/users/jquinn13/HostWords'
 
-	print('Running HTML To Words')
+	print('Running HTML To HostWords')
 	command = f'''
 		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 		-files    htmltowords.py \
 		-input    /public/www.2021 \
 		-output   {HOST_WORDS_DIR} \
 		-mapper   'htmltowords.py -h' \
+		-reducer  NONE
+	'''
+	os.system(command)
+
+def HtmlToHosts():
+
+	HOSTS_DIR = '/users/jquinn13/Hosts'
+
+	print('Running HTML To Hosts')
+	command = f'''
+		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+		-files    htmltohosts.py \
+		-input    /public/www.2021 \
+		-output   {HOSTS_DIR} \
+		-mapper   htmltohosts.py \
 		-reducer  NONE
 	'''
 	os.system(command)
