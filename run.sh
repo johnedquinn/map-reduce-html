@@ -1,126 +1,66 @@
-#!/usr/bin/env python3
+#!/usr/bin/env bash
 
-import os
-import sys
+### Functions
 
-def HtmlToWords():
-
-	WORDS_DIR = '/users/jquinn13/Words'
-
-	print('Running HTML To Words')
-	command = f'''
-		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-		-files    htmltowords.py \
-		-input    /public/www.2021 \
-		-output   {WORDS_DIR} \
-		-mapper   htmltowords.py \
-		-reducer  NONE
-	'''
-	os.system(command)
-
-def HtmlToHostWords():
-
-	HOST_WORDS_DIR = '/users/jquinn13/HostWords'
-
-	print('Running HTML To HostWords')
-	command = f'''
-		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-		-files    htmltowords.py \
-		-input    /public/www.2021 \
-		-output   {HOST_WORDS_DIR} \
-		-mapper   'htmltowords.py -h' \
-		-reducer  NONE
-	'''
-	os.system(command)
-
-def HtmlToHosts():
-
-	HOSTS_DIR = '/users/jquinn13/Hosts'
-
-	print('Running HTML To Hosts')
-	command = f'''
-		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-		-files    htmltohosts.py \
-		-input    /public/www.2021 \
-		-output   {HOSTS_DIR} \
-		-mapper   htmltohosts.py \
-		-reducer  NONE
-	'''
-	os.system(command)
-
-
-def WordCount():
-
-	WORDS_DIR   = '/users/jquinn13/Words'
-	OUT_DIR = '/users/jquinn13/WordCount'
-
-	print('Running WordCount Map-Reduce')
-	command = f'''
-		hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-		-files    WordCountMap.py,WordCountReduce.py \
-		-input    {WORDS_DIR} \
-		-output   {OUT_DIR} \
-		-mapper   WordCountMap.py \
-		-reducer  WordCountReduce.py
-	'''
-	os.system(command)
-
-def Bigrams():
-
-	WORDS_DIR   = '/users/jquinn13/Words'
-	OUT_DIR = '/users/jquinn13/Bigrams'
-
-	print('Running Bigrams Map-Reduce')
-	command = f'''
-		hadoop \
-		jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-		-files    BigramsMap.py,BigramsReduce.py \
-		-input    {WORDS_DIR} \
-		-output   {OUT_DIR} \
-		-mapper   BigramsMap.py \
-		-reducer  BigramsReduce.py
-	'''
-	os.system(command)
-
-def InvertedIndex():
-
-	HOST_WORDS_DIR   = '/users/jquinn13/HostWords'
-	OUT_DIR = '/users/jquinn13/InvertedIndex'
-
-	print('Running InvertedIndex Map-Reduce')
-	command = f'''
-		hadoop \
-		jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-		-files    InvertedIndexMap.py,InvertedIndexReduce.py \
-		-input    {HOST_WORDS_DIR} \
-		-output   {OUT_DIR} \
-		-mapper   InvertedIndexMap.py \
-		-reducer  InvertedIndexReduce.py
-	'''
-	os.system(command)
-
-def Hadoop(files, inDir, outDir, mapper, reducer):
-	command = f'''
-		hadoop \
-		jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-		-files    {files} \
-		-input    {inDir} \
-		-output   {outDir} \
-		-mapper   {mapper} \
-		-reducer  {reducer}
-	'''
-	os.system(command)
+##
+# @desc  NA
+##
+function Hadoop () {
+	# Grab Arguments
+	files=$1
+	inDir=$2
+	outDir=$3
+	mapper=$4
+	reducer=$5
 	
+	# Run Hadoop
+	hadoop \
+	jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+	-files    ${files} \
+	-input    ${inDir} \
+	-output   ${outDir} \
+	-mapper   ${mapper} \
+	-reducer  ${reducer}
+
+	return 0
+}
 	
-if __name__ == '__main__':
+### Main Execution
 
-	if len(sys.argv) != 2:
-		print('USAGE: ./run.py [OPTION]')
-		sys.exit(1)
+# Check Arguments Length
+if [ $# -eq 0 ]; then
+	echo "USAGE: ./run.py [OPTION]\n"
+	exit 1
+fi
 
-	if sys.argv[1] == 'OutLinks':
-		Hadoop('OutLinksMap.py,OutLinksReduce.py', '/users/jquinn13/Hosts', '/users/jquinn13/OutLinks', 'OutLinksMap.py', 'OutLinksReduce.py')
-	elif sys.argv[1] == 'Hosts':
-		Hadoop('htmltohosts.py', '/public/www.2021', '/users/jquinn13/Hosts', 'htmltohosts.py', 'NONE')
-	else:
-		print('Not an option')
+# Check Which Hadoop to Run
+if [ "$1" = "Hosts" ]; then
+	Hadoop "htmltohosts.py" "/public/www.2021" "/users/jquinn13/Hosts" "htmltohosts.py" "NONE"
+
+elif [ "$1" = "Words" ]; then
+	Hadoop "htmltowords.py" "/public/www.2021" "/users/jquinn13/Words" "htmltowords.py" "NONE"
+
+elif [ "$1" = "HostWords" ]; then
+	Hadoop "htmltowords.py" "/public/www.2021" "/users/jquinn13/HostWords" "htmltohosts.py -h" "NONE"
+
+elif [ "$1" = "WordCount" ]; then
+	Hadoop "WordCountMap.py,WordCountReduce.py" "/users/jquinn13/Words" "/users/jquinn13/WordCount" "WordCountMap.py" "WordCountReduce.py"
+
+elif [ "$1" = "Bigrams" ]; then
+	Hadoop "BigramsMap.py,BigramsReduce.py" "/users/jquinn13/Words" "/users/jquinn13/Bigrams" "BigramsMap.py" "BigramsReduce.py"
+
+elif [ "$1" = "InvertedIndex" ]; then
+	Hadoop "InvertedIndexMap.py,InvertedIndexReduce.py" "/users/jquinn13/Words" "/users/jquinn13/InvertedIndex" "InvertedIndexMap.py" "InvertedIndexReduce.py"
+
+elif [ "$1" = "OutLinks" ]; then
+	Hadoop "OutLinksMap.py,OutLinksReduce.py" "/users/jquinn13/Hosts" "/users/jquinn13/OutLinks" "OutLinksMap.py" "OutLinksReduce.py"
+
+elif [ "$1" = "InLinks" ]; then
+	Hadoop "InLinksMap.py,InLinksReduce.py" "/users/jquinn13/Hosts" "/users/jquinn13/InLinks" "InLinksMap.py" "InLinksReduce.py"
+
+else
+	echo "Not an option"
+	exit 1
+fi
+
+exit 0
