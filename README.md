@@ -6,7 +6,7 @@ A collection of useful Map Reduce functions that give insight on HTML documents
 ### Word Count
 #### To Run
 ```console
-# Using the provided shell script
+-- Using the provided shell script
 $ ./run.sh WordCount
 
 # Running it on your own
