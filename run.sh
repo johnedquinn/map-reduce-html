@@ -58,6 +58,9 @@ elif [ "$1" = "OutLinks" ]; then
 elif [ "$1" = "InLinks" ]; then
 	Hadoop "InLinksMap.py,InLinksReduce.py" "/users/jquinn13/Hosts" "/users/jquinn13/InLinks" "InLinksMap.py" "InLinksReduce.py"
 
+elif [ "$1" = "NDegrees" ]; then
+	Hadoop "NDegreesMap.py,NDegreesReduce.py" "/users/jquinn13/Hosts" "/users/jquinn13/NDegrees" "NDegreesMap.py" "NDegreesReduce.py"
+
 else
 	echo "Not an option"
 	exit 1
