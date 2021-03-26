@@ -10,12 +10,7 @@ A collection of useful Map Reduce functions that give insight on HTML documents
 $ ./run.sh WordCount
 
 -- Running it on your own
-$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
--files WordCountMap.py,WordCountReduce.py \
--input /users/jquinn13/Words \
--output /users/jquinn13/WordCount \
--mapper WordCountMap.py \
--reducer WordCountReduce.py
+$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -files WordCountMap.py,WordCountReduce.py -input /users/jquinn13/Words -output /users/jquinn13/WordCount -mapper WordCountMap.py -reducer WordCountReduce.py
 ```
 
 #### Example Output
@@ -39,12 +34,7 @@ new 26347
 $ ./run.sh Bigrams
 
 -- Running it on your own
-$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
--files BigramsMap.py,BigramsReduce.py \
--input /users/jquinn13/Words \
--output /users/jquinn13/Bigrams \
--mapper BigramsMap.py \
--reducer BigramsReduce.py
+$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -files BigramsMap.py,BigramsReduce.py -input /users/jquinn13/Words -output /users/jquinn13/Bigrams -mapper BigramsMap.py -reducer BigramsReduce.py
 ```
 
 #### Example Output
@@ -69,12 +59,7 @@ the:university  5189
 $ ./run.sh InvertedIndex
 
 -- Running it on your own
-$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
--files InvertedIndexMap.py,InvertedIndexReduce.py \
--input /users/jquinn13/Words \
--output /users/jquinn13/InvertedIndex \
--mapper InvertedIndexMap.py \
--reducer InvertedIndexReduce.py
+$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -files InvertedIndexMap.py,InvertedIndexReduce.py -input /users/jquinn13/HostWords -output /users/jquinn13/InvertedIndex -mapper InvertedIndexMap.py -reducer InvertedIndexReduce.py
 ```
 
 #### Example Output
@@ -98,12 +83,7 @@ aacap members.precisionhealth.umich.edu
 $ ./run.sh OutLinks
 
 -- Running it on your own
-$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
--files OutLinksMap.py,OutLinksReduce.py \
--input /users/jquinn13/Hosts \
--output /users/jquinn13/OutLinks \
--mapper OutLinksMap.py \
--reducer OutLinksReduce.py
+$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -files OutLinksMap.py,OutLinksReduce.py -input /users/jquinn13/Hosts -output /users/jquinn13/OutLinks -mapper OutLinksMap.py -reducer OutLinksReduce.py
 ```
 
 ### In-Links
@@ -113,12 +93,7 @@ $ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 $ ./run.sh InLinks
 
 -- Running it on your own
-$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
--files InLinksMap.py,InLinksReduce.py \
--input /users/jquinn13/Hosts \
--output /users/jquinn13/InLinks \
--mapper InLinksMap.py \
--reducer InLinksReduce.py
+$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -files InLinksMap.py,InLinksReduce.py -input /users/jquinn13/Hosts -output /users/jquinn13/InLinks -mapper InLinksMap.py -reducer InLinksReduce.py
 ```
 
 #### Example Output
@@ -143,12 +118,7 @@ $ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 $ ./run.sh NDegrees
 
 -- Running it on your own
-$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
--files NDegreesMap.py,NDegreesReduce.py \
--input /users/jquinn13/Hosts \
--output /users/jquinn13/NDegrees \
--mapper NDegreesMap.py \
--reducer NDegreesReduce.py
+$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -files NDegreesMap.py,NDegreesReduce.py -input /users/jquinn13/Hosts -output /users/jquinn13/NDegrees -mapper NDegreesMap.py -reducer NDegreesReduce.py
 ```
 
 #### Output
