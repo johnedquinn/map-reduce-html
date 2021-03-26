@@ -11,8 +11,8 @@ $ ./run.sh WordCount
 
 -- Running it on your own
 $ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
--files WordCountMap.py,WordCountReduce.py \
--input /users/jquinn13/Words \
+\-files WordCountMap.py,WordCountReduce.py \
+\-input /users/jquinn13/Words \
 -output /users/jquinn13/WordCount \
 -mapper WordCountMap.py \
 -reducer WordCountReduce.py
