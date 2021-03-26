@@ -1,5 +1,20 @@
 # map-reduce-html
-A collection of useful Map Reduce functions that give insight on HTML documents
+A collection of useful Map Reduce programs that provide insight on HTML documents stored on the HDFS file system maintained by the University of Notre Dame.
+
+## Prerequisites
+- Hadoop
+- Python 3
+
+## File Descriptions
+- `htmltohosts`: Read HTML on the standard input, find the A HREF tags, and emit only the hostnames present in those tags, one per line.
+- `htmltowords`: Read HTML on the standard input, remove extraneous items such as tags and punctuation, and emit only simple lowercase words of three or more characters, one per line.
+- `WordCount`: Produce a listing of all words that appear in all documents, each with a count of frequency, sorted by frequency.
+- `Bigrams`: Produce a listing of the top ten bi-grams (pair of adjacent words) in the dataset.
+- `InvertedIndex`: For each word encountered, produce a list of all hosts in which the word occurs.
+- `Out-Links`: For each host, produce a unique list of hosts that it links to.
+- `InLinks`: For each host, produce a unique list of hosts that link TO it.
+- `NDegrees`: Produce a listing of all hosts 1 hop from www.nd.edu. Then, produce a listing for 2 hops, 3 hops, and so forth, until the result converges.
+- `run.sh`: Helps run the Hadoop commands associated with the above programs. See below for more details.
 
 ## Programs and Outputs
 

@@ -50,7 +50,7 @@ elif [ "$1" = "Bigrams" ]; then
 	Hadoop "BigramsMap.py,BigramsReduce.py" "/users/jquinn13/Words" "/users/jquinn13/Bigrams" "BigramsMap.py" "BigramsReduce.py"
 
 elif [ "$1" = "InvertedIndex" ]; then
-	Hadoop "InvertedIndexMap.py,InvertedIndexReduce.py" "/users/jquinn13/Words" "/users/jquinn13/InvertedIndex" "InvertedIndexMap.py" "InvertedIndexReduce.py"
+	Hadoop "InvertedIndexMap.py,InvertedIndexReduce.py" "/users/jquinn13/HostWords" "/users/jquinn13/InvertedIndex" "InvertedIndexMap.py" "InvertedIndexReduce.py"
 
 elif [ "$1" = "OutLinks" ]; then
 	Hadoop "OutLinksMap.py,OutLinksReduce.py" "/users/jquinn13/Hosts" "/users/jquinn13/OutLinks" "OutLinksMap.py" "OutLinksReduce.py"
