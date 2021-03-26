@@ -9,8 +9,14 @@ A collection of useful Map Reduce functions that give insight on HTML documents
 -- Using the provided shell script
 $ ./run.sh WordCount
 
-# Running it on your own
-$ XXX
+-- Running it on your own
+$ hadoop \
+	jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+	-files    ${files} \
+	-input    ${inDir} \
+	-output   ${outDir} \
+	-mapper   ${mapper} \
+	-reducer  ${reducer}
 ```
 
 #### Example Output
@@ -30,10 +36,10 @@ new 26347
 ### Bigrams
 #### To Run
 ```console
-# Using the provided shell script
+-- Using the provided shell script
 $ ./run.sh Bigrams
 
-# Running it on your own
+-- Running it on your own
 $ XXX
 ```
 
@@ -55,10 +61,10 @@ the:university  5189
 
 #### To Run
 ```console
-# Using the provided shell script
+-- Using the provided shell script
 $ ./run.sh InvertedIndex
 
-# Running it on your own
+-- Running it on your own
 $ XXX
 ```
 
@@ -79,20 +85,20 @@ aacap members.precisionhealth.umich.edu
 ### Out-Links
 #### To Run
 ```console
-# Using the provided shell script
+-- Using the provided shell script
 $ ./run.sh OutLinks
 
-# Running it on your own
+-- Running it on your own
 $ XXX
 ```
 
 ### In-Links
 #### To Run
 ```console
-# Using the provided shell script
+-- Using the provided shell script
 $ ./run.sh InLinks
 
-# Running it on your own
+-- Running it on your own
 $ XXX
 ```
 
@@ -114,10 +120,10 @@ $ XXX
 
 #### To Run
 ```console
-# Using the provided shell script
+-- Using the provided shell script
 $ ./run.sh NDegrees
 
-# Running it on your own
+-- Running it on your own
 $ XXX
 ```
 
